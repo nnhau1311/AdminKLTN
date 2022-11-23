@@ -1,38 +1,90 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Login */
+.login__content {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.login__form {
+  width: 30%;
+  padding: 0px 50px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login__form__title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.ant-form-item.login__content__password.css-dev-only-do-not-override-ewsw4z.ant-form-item-has-success {
+  margin-bottom: 8px;
+}
+button.ant-btn.css-dev-only-do-not-override-143wnbt.ant-btn-primary {
+  background-color: orange;
+}
+.login__form__button {
+  width: 100%;
+  background-color: orange;
+}
+.login__form__button:hover {
+  background-color: orange !important;
+}
+.login__form__button:focus {
+  background-color: orange !important;
+}
+.login__form__forgot {
+  margin: 8px 0px 20px 0px;
+}
+/* Sider */
+.sidebar__sider {
+  background-color: white !important;
+}
+li.ant-menu-item.ant-menu-item-selected {
+  background-color: orange !important;
+}
+.ant-layout-sider-trigger {
+  background-color: orange !important;
+}
+/* Header */
+.header__content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+}
+.header__content__logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: orange;
+}
+.header__content__logo:hover {
+  font-size: 24px;
+  font-weight: 600;
+  color: orange;
+}
+.header__content__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+.header__content__icon__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: orange;
+}
+.header__content__icon__avatar {
+  color: orange;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid inherit;
+  margin-left: 20px;
+}
+/* User */
+.userview__pagination {
+  display: flex;
+  margin-top: 16px;
+  justify-content: end;
 }
