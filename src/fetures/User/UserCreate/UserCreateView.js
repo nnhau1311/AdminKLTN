@@ -43,15 +43,20 @@ export default function UserView() {
                   message: "This field is required",
                 },
                 {
+                  max: 24,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 8,
+                  message: "This field minimum length is only 8 characters",
+                },
+                {
                   validator: (__, value) => {
                     console.log(value);
                     if (
-                      new RegExp(
-                        "^([" +
-                          "àáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ" +
-                          "\n" +
-                          "]+$)"
-                      ).test(value) &&
+                      !new RegExp("^([" + "a-z" + "0-9" + "\n" + "]+$)").test(
+                        value
+                      ) &&
                       value
                     ) {
                       console.log(123);
@@ -78,6 +83,14 @@ export default function UserView() {
                   required: true,
                   message: "This field is required",
                 },
+                {
+                  max: 24,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 8,
+                  message: "This field minimum length is only 8 characters",
+                },
               ]}
             >
               <Input placeholder="content" />
@@ -96,6 +109,14 @@ export default function UserView() {
                   required: true,
                   message: "This field is required",
                 },
+                {
+                  max: 30,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 6,
+                  message: "This field minimum length is only 8 characters",
+                },
               ]}
             >
               <Input placeholder="content" />
@@ -113,6 +134,21 @@ export default function UserView() {
                 {
                   required: true,
                   message: "This field is required",
+                },
+                {
+                  validator: (__, value) => {
+                    console.log(value);
+                    if (
+                      !new RegExp(
+                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                      ).test(value) &&
+                      value
+                    ) {
+                      console.log(123);
+                      return Promise.reject("This field is malformed");
+                    }
+                    return Promise.resolve();
+                  },
                 },
               ]}
             >

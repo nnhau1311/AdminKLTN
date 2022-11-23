@@ -49,6 +49,14 @@ export default function HabitCreateView() {
                   required: true,
                   message: "This field is required",
                 },
+                {
+                  max: 100,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 8,
+                  message: "This field minimum length is only 8 characters",
+                },
               ]}
             >
               <Input placeholder="content" />
@@ -66,6 +74,14 @@ export default function HabitCreateView() {
                 {
                   required: true,
                   message: "This field is required",
+                },
+                {
+                  max: 100,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 8,
+                  message: "This field minimum length is only 8 characters",
                 },
               ]}
             >
@@ -87,7 +103,14 @@ export default function HabitCreateView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input
+                placeholder="content"
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -102,6 +125,14 @@ export default function HabitCreateView() {
                 {
                   required: true,
                   message: "This field is required",
+                },
+                {
+                  max: 100,
+                  message: "This field maximum length is only 24 characters",
+                },
+                {
+                  min: 8,
+                  message: "This field minimum length is only 8 characters",
                 },
               ]}
             >

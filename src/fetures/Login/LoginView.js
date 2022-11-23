@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
@@ -6,7 +6,6 @@ import habitChild from "../../assets/image/habit-child.png";
 import { login } from "../../api";
 export default function LoginView() {
   const [form] = Form.useForm();
-  const [check, isCheck] = useState(false);
   const navigate = useNavigate();
   const onSignIn = async (values) => {
     const { username, password } = values;
@@ -14,22 +13,21 @@ export default function LoginView() {
       username,
       password,
     };
-    const result = await login(params);
-    console.log(result);
-    console.log(result.data.StatusCode);
-    if (result.data.StatusCode == 200) {
-      if (check) {
+    try {
+      const result = await login(params);
+      console.log(result);
+      console.log(result.data.StatusCode);
+      if (result.data.StatusCode == 200) {
+        console.log(1);
         localStorage.setItem("username", JSON.stringify(username));
         localStorage.setItem(
           "accessToken",
           JSON.stringify(result.data?.Data?.accessToken)
         );
         navigate("/home");
-        console.log(123);
-      } else {
-        localStorage.setItem("username", JSON.stringify(username));
-        navigate("/home");
       }
+    } catch (error) {
+      message.error("Thông tin đăng nhập không chính xác");
     }
   };
   return (
@@ -50,15 +48,7 @@ export default function LoginView() {
               placeholder="Password"
             />
           </Form.Item>
-          <Checkbox
-            checked={check}
-            style={{ display: "flex", marginBottom: "8px" }}
-            onClick={() => {
-              isCheck(!check);
-            }}
-          >
-            Remember Login
-          </Checkbox>
+
           <Button
             type="primary"
             className="login__form__button"

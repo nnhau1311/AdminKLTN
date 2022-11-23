@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -13,6 +13,12 @@ const {
 
 export default function Private() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const activeKey =
+    (location.pathname.includes("habit") && "habit") ||
+    (location.pathname.includes("user") && "user") ||
+    "none";
+  console.log(activeKey);
   useEffect(() => {
     if (!localStorage.getItem("username")) {
       navigate("/");
@@ -26,7 +32,7 @@ export default function Private() {
         <Header />
       </HeaderLayout>
       <Layout>
-        <Sidebar />
+        <Sidebar activeKey={activeKey} />
         <Layout>
           <ContentLayout
             style={{

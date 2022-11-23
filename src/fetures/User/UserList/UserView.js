@@ -1,11 +1,11 @@
-import { Button, Card, Pagination, Popconfirm, Table } from "antd";
-import axios from "axios";
+import { Card, Pagination, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { allHabit, allUser } from "../../../api";
+import { activeUser, allUser, disableUser } from "../../../api";
 export default function UserCreateView() {
   const [data, setData] = useState();
   const [dataCount, setDataCount] = useState();
+  const [current, setCurrent] = useState(1);
   const showPopconfirm = () => {};
   const handleOk = () => {
     console.log(123);
@@ -32,35 +32,42 @@ export default function UserCreateView() {
       dataIndex: "userNumberPhone",
       width: "40%",
     },
-    // {
-    //   title: "Action",
-    //   width: "20%",
-    //   render: (text, record, index) => {
-    //     return (
-    //       <>
-    //         <Link type="primary" to={`/home/habit/edit/${record?.id}`}>
-    //           Edit
-    //         </Link>
-    //         <Popconfirm
-    //           title="Sure to delete?"
-    //           onConfirm={() => {
-    //             handleOk(record?.id);
-    //           }}
-    //         >
-    //           <Link
-    //             type="primary"
-    //             style={{
-    //               marginLeft: 20,
-    //             }}
-    //             onClick={showPopconfirm}
-    //           >
-    //             Delete
-    //           </Link>
-    //         </Popconfirm>
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      title: "Action",
+      width: "20%",
+      render: (text, record, index) => {
+        return (
+          <>
+            {record.status == 1 && (
+              <Link
+                onClick={() => {
+                  activeUser(record.id);
+                  allUser(0, 10).then((result) => {
+                    setData(result.data.Data.content);
+                    setDataCount(result.data.Data.totalElements);
+                  });
+                }}
+              >
+                Khóa
+              </Link>
+            )}
+            {record.status == -1 && (
+              <Link
+                onClick={() => {
+                  disableUser(record.id);
+                  allUser(0, 10).then((result) => {
+                    setData(result.data.Data.content);
+                    setDataCount(result.data.Data.totalElements);
+                  });
+                }}
+              >
+                Mở khóa
+              </Link>
+            )}
+          </>
+        );
+      },
+    },
   ];
   useEffect(() => {
     allUser(0, 10).then((result) => {
@@ -91,9 +98,10 @@ export default function UserCreateView() {
         onChange={(e) => {
           allUser(e - 1).then((result) => {
             setData(result.data.Data.content);
+            setCurrent(e);
           });
         }}
-        current={1}
+        current={current}
         total={dataCount}
         className="userview__pagination"
       />

@@ -1,4 +1,4 @@
-import { Button, Card, Popconfirm, Table } from "antd";
+import { Button, Card, Pagination, Popconfirm, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,7 +6,8 @@ import { allHabit } from "../../../api";
 
 export default function HabitView() {
   const [data, setData] = useState();
-
+  const [dataCount, setDataCount] = useState();
+  const [current, setCurrent] = useState(1);
   const showPopconfirm = () => {};
   const handleOk = () => {
     console.log(123);
@@ -70,8 +71,9 @@ export default function HabitView() {
     },
   ];
   useEffect(() => {
-    allHabit().then((result) => {
+    allHabit(0, 10).then((result) => {
       setData(result.data.Data.content);
+      setDataCount(result.data.Data.totalElements);
     });
   }, []);
   console.log(data);
@@ -88,9 +90,20 @@ export default function HabitView() {
         bordered
         dataSource={data}
         columns={columns}
+        pagination={false}
         rowClassName="editable-row"
-        pagination
         scroll={{ y: "53vh" }}
+      />
+      <Pagination
+        onChange={(e) => {
+          allHabit(e - 1).then((result) => {
+            setData(result.data.Data.content);
+            setCurrent(e);
+          });
+        }}
+        current={current}
+        total={dataCount}
+        className="userview__pagination"
       />
     </Card>
   );

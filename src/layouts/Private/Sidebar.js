@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom/dist";
 const { Sider } = Layout;
-export default function Sidebar() {
+export default function Sidebar({ activeKey }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const activeKey = location.pathname.includes("habit") ? "habit" : "user";
+
   function getItem(label, key, icon, path, children) {
     return {
       key,
@@ -34,7 +34,7 @@ export default function Sidebar() {
     >
       <Menu
         items={items}
-        defaultSelectedKeys={[activeKey]}
+        selectedKeys={[activeKey]}
         onClick={(e) => {
           navigate(`/home/${e.key}`);
         }}
