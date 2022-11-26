@@ -1,11 +1,12 @@
 import { Button, Card, Pagination, Popconfirm, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { allHabit } from "../../../api";
 
 export default function HabitView() {
   const [data, setData] = useState();
+  const navigate = useNavigate();
   const [dataCount, setDataCount] = useState();
   const [current, setCurrent] = useState(1);
   const showPopconfirm = () => {};
@@ -46,7 +47,11 @@ export default function HabitView() {
       render: (text, record, index) => {
         return (
           <>
-            <Link type="primary" to={`/home/habit/edit/${record?.id}`}>
+            <Link
+              type="primary"
+              to={`/home/habit/edit/${record?.id}`}
+              state={{ page: current - 1 }}
+            >
               Edit
             </Link>
             <Popconfirm
@@ -82,7 +87,9 @@ export default function HabitView() {
       title={"Habit Manager"}
       extra={
         <>
-          <Link to={"/home/habit/create"}>Add</Link>
+          <Link to={"/home/habit/create"} state={current}>
+            Add
+          </Link>
         </>
       }
     >

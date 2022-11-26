@@ -1,4 +1,4 @@
-import { Card, Pagination, Table } from "antd";
+import { Card, Pagination, Popconfirm, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { activeUser, allUser, disableUser } from "../../../api";
@@ -6,6 +6,8 @@ export default function UserCreateView() {
   const [data, setData] = useState();
   const [dataCount, setDataCount] = useState();
   const [current, setCurrent] = useState(1);
+  const [open, setOpen] = useState(false);
+
   const showPopconfirm = () => {};
   const handleOk = () => {
     console.log(123);
@@ -26,11 +28,13 @@ export default function UserCreateView() {
       title: "UserAddress",
       dataIndex: "userAddress",
       width: "40%",
+      render: (text, record) => text || "Chưa cập nhật",
     },
     {
       title: "UserNumberPhone",
       dataIndex: "userNumberPhone",
       width: "40%",
+      render: (text, record) => text || "Chưa cập nhật",
     },
     {
       title: "Action",
@@ -39,30 +43,32 @@ export default function UserCreateView() {
         return (
           <>
             {record.status == 1 && (
-              <Link
-                onClick={() => {
-                  activeUser(record.id);
-                  allUser(0, 10).then((result) => {
+              <Popconfirm
+                title="Lock this user ?"
+                onConfirm={() => {
+                  disableUser(record.id);
+                  allUser(current - 1, 10).then((result) => {
                     setData(result.data.Data.content);
                     setDataCount(result.data.Data.totalElements);
                   });
                 }}
               >
-                Khóa
-              </Link>
+                <Link>Khóa</Link>
+              </Popconfirm>
             )}
             {record.status == -1 && (
-              <Link
-                onClick={() => {
-                  disableUser(record.id);
-                  allUser(0, 10).then((result) => {
+              <Popconfirm
+                title="Unlock this user ?"
+                onConfirm={() => {
+                  activeUser(record.id);
+                  allUser(current - 1, 10).then((result) => {
                     setData(result.data.Data.content);
                     setDataCount(result.data.Data.totalElements);
                   });
                 }}
               >
-                Mở khóa
-              </Link>
+                <Link>Mở khóa</Link>
+              </Popconfirm>
             )}
           </>
         );

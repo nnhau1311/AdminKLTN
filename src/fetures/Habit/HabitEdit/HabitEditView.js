@@ -1,10 +1,12 @@
 import { Button, Card, Col, Form, Input, message, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { allHabit, editHabit } from "../../../api";
 
 export default function HabitEditView() {
   const [form] = Form.useForm();
+  const location = useLocation();
+  console.log(location);
   const [data, setData] = useState();
   const params = useParams();
   const { id: IDParams } = params;
@@ -36,14 +38,13 @@ export default function HabitEditView() {
     }
   };
   useEffect(() => {
-    allHabit().then((result) => {
+    allHabit(location.state?.page, 10).then((result) => {
       const habit = result.data.Data.content.find((item, index) => {
         return item.id === params.id;
       });
       setData(habit);
     });
   }, []);
-  console.log(data);
   return (
     <>
       {data && (
