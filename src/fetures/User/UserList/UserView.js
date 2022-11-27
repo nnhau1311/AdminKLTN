@@ -37,7 +37,7 @@ export default function UserCreateView() {
       render: (text, record) => text || "Chưa cập nhật",
     },
     {
-      title: "Action",
+      title: "Lock/Unlock",
       width: "20%",
       render: (text, record, index) => {
         return (
@@ -45,31 +45,64 @@ export default function UserCreateView() {
             {record.status == 1 && (
               <Popconfirm
                 title="Lock this user ?"
-                onConfirm={() => {
-                  disableUser(record.id);
-                  allUser(current - 1, 10).then((result) => {
+                onConfirm={async () => {
+                  await disableUser(record.id);
+                  await allUser(current - 1, 10).then((result) => {
                     setData(result.data.Data.content);
                     setDataCount(result.data.Data.totalElements);
                   });
                 }}
               >
-                <Link>Khóa</Link>
+                <Link>Lock</Link>
               </Popconfirm>
             )}
             {record.status == -1 && (
               <Popconfirm
                 title="Unlock this user ?"
-                onConfirm={() => {
-                  activeUser(record.id);
-                  allUser(current - 1, 10).then((result) => {
+                onConfirm={async () => {
+                  await activeUser(record.id);
+                  await allUser(current - 1, 10).then((result) => {
                     setData(result.data.Data.content);
                     setDataCount(result.data.Data.totalElements);
                   });
                 }}
               >
-                <Link>Mở khóa</Link>
+                <Link>Unlock</Link>
               </Popconfirm>
             )}
+          </>
+        );
+      },
+    },
+    {
+      title: "Action",
+      width: "20%",
+      render: (text, record, index) => {
+        return (
+          <>
+            <Link
+              type="primary"
+              to={`/home/user/edit/${record?.id}`}
+              state={{ page: current - 1 }}
+            >
+              Edit
+            </Link>
+            {/* <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => {
+                handleOk(record?.id);
+              }}
+            >
+              <Link
+                type="primary"
+                style={{
+                  marginLeft: 20,
+                }}
+                onClick={showPopconfirm}
+              >
+                Delete
+              </Link>
+            </Popconfirm> */}
           </>
         );
       },

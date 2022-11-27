@@ -2,7 +2,7 @@ import { Button, Card, Pagination, Popconfirm, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { allHabit } from "../../../api";
+import { activeHabit, allHabit, disableHabit } from "../../../api";
 
 export default function HabitView() {
   const [data, setData] = useState();
@@ -42,6 +42,44 @@ export default function HabitView() {
       },
     },
     {
+      title: "Lock/Unlock",
+      width: "20%",
+      render: (text, record, index) => {
+        return (
+          <>
+            {record.status == 0 && (
+              <Popconfirm
+                title="Lock this user ?"
+                onConfirm={async () => {
+                  await disableHabit(record.id);
+                  await allHabit(current - 1, 10).then((result) => {
+                    setData(result.data.Data.content);
+                    setDataCount(result.data.Data.totalElements);
+                  });
+                }}
+              >
+                <Link>Lock</Link>
+              </Popconfirm>
+            )}
+            {record.status == -1 && (
+              <Popconfirm
+                title="Unlock this user ?"
+                onConfirm={async () => {
+                  await activeHabit(record.id);
+                  await allHabit(current - 1, 10).then((result) => {
+                    setData(result.data.Data.content);
+                    setDataCount(result.data.Data.totalElements);
+                  });
+                }}
+              >
+                <Link>Unlock</Link>
+              </Popconfirm>
+            )}
+          </>
+        );
+      },
+    },
+    {
       title: "Action",
       width: "20%",
       render: (text, record, index) => {
@@ -54,7 +92,7 @@ export default function HabitView() {
             >
               Edit
             </Link>
-            <Popconfirm
+            {/* <Popconfirm
               title="Sure to delete?"
               onConfirm={() => {
                 handleOk(record?.id);
@@ -69,7 +107,7 @@ export default function HabitView() {
               >
                 Delete
               </Link>
-            </Popconfirm>
+            </Popconfirm> */}
           </>
         );
       },
