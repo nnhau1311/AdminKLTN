@@ -59,7 +59,7 @@ export default function HabitCreateView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="Habit Name" />
             </Form.Item>
           </Col>
         </Row>
@@ -85,7 +85,7 @@ export default function HabitCreateView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="Habit Type" />
             </Form.Item>
           </Col>
         </Row>
@@ -104,7 +104,7 @@ export default function HabitCreateView() {
               ]}
             >
               <Input
-                placeholder="content"
+                placeholder="Number Date Execute"
                 onKeyPress={(event) => {
                   if (!/[0-9]/.test(event.key)) {
                     event.preventDefault();
@@ -136,7 +136,7 @@ export default function HabitCreateView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="Implementation Content" />
             </Form.Item>
           </Col>
         </Row>

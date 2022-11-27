@@ -73,7 +73,7 @@ export default function HabitEditView() {
                     },
                   ]}
                 >
-                  <Input placeholder="content" />
+                  <Input placeholder="Habit Name" />
                 </Form.Item>
               </Col>
             </Row>
@@ -91,7 +91,7 @@ export default function HabitEditView() {
                     },
                   ]}
                 >
-                  <Input placeholder="content" />
+                  <Input placeholder="Habit Type" />
                 </Form.Item>
               </Col>
             </Row>
@@ -109,7 +109,7 @@ export default function HabitEditView() {
                     },
                   ]}
                 >
-                  <Input placeholder="content" />
+                  <Input placeholder="Number Date Execute" />
                 </Form.Item>
               </Col>
             </Row>
@@ -127,7 +127,7 @@ export default function HabitEditView() {
                     },
                   ]}
                 >
-                  <Input placeholder="content" />
+                  <Input placeholder="Implementation Content" />
                 </Form.Item>
               </Col>
             </Row>

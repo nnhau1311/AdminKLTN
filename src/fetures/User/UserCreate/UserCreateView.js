@@ -67,7 +67,7 @@ export default function UserView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="User Name" />
             </Form.Item>
           </Col>
         </Row>
@@ -93,7 +93,7 @@ export default function UserView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="User Password" />
             </Form.Item>
           </Col>
         </Row>
@@ -119,7 +119,7 @@ export default function UserView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="User FullName" />
             </Form.Item>
           </Col>
         </Row>
@@ -152,7 +152,7 @@ export default function UserView() {
                 },
               ]}
             >
-              <Input placeholder="content" />
+              <Input placeholder="User Email" />
             </Form.Item>
           </Col>
         </Row>

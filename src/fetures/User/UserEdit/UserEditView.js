@@ -62,7 +62,7 @@ export default function UserEditView() {
                   },
                 ]}
               >
-                <Input placeholder="content" />
+                <Input placeholder="User Address" />
               </Form.Item>
             </Col>
           </Row>
@@ -88,7 +88,7 @@ export default function UserEditView() {
                   },
                 ]}
               >
-                <Input placeholder="content" />
+                <Input placeholder="User FullName" />
               </Form.Item>
             </Col>
           </Row>
@@ -107,7 +107,7 @@ export default function UserEditView() {
                 ]}
               >
                 <Input
-                  placeholder="content"
+                  placeholder="User NumberPhone"
                   onKeyPress={(event) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();
