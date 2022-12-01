@@ -18,12 +18,12 @@ export default function HomeView() {
         Welcome to HabitChild
       </p>
       <div>
-        <Card title="Chart" className="chart-card">
+        <Card title="Statistical" className="chart-card">
           <Tabs defaultActiveKey="1">
-            <Tabs.TabPane tab="UserChart" key="1">
+            <Tabs.TabPane tab="User Statistical" key="1">
               <UserChart />
             </Tabs.TabPane>
-            <Tabs.TabPane tab="HabitChart" key="2">
+            <Tabs.TabPane tab="Habit Statistical" key="2">
               <HabitChart />
             </Tabs.TabPane>
           </Tabs>
