@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:9090";
+const URL = "http://171.240.159.162:9090";
 export const login = async (params) =>
   await axios.post(`${URL}/auth/login`, params);
 export const allHabit = async (num, size) =>
