@@ -70,6 +70,7 @@ export default function UserCreateView() {
                 <Link>Unlock</Link>
               </Popconfirm>
             )}
+            {record.status == 10 && <Link>InActive</Link>}
           </>
         );
       },

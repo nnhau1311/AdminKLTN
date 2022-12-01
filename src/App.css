@@ -88,3 +88,6 @@ li.ant-menu-item.ant-menu-item-selected {
   margin-top: 16px;
   justify-content: end;
 }
+.chart-card .ant-card-body {
+  padding: 0px 24px;
+}

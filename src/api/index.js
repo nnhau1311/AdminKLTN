@@ -27,3 +27,5 @@ export const editUser = (params, id) =>
   axios.post(`${URL}/user/update-infor/${id}`, params);
 export const activeUser = (id) => axios.post(`${URL}/user/active/${id}`);
 export const disableUser = (id) => axios.post(`${URL}/user/disable/${id}`);
+export const getHabitChart = () => axios.post(`${URL}/statistic/habits/basic`);
+export const getUserChart = () => axios.post(`${URL}/statistic/user/basic`);
